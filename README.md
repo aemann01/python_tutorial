@@ -8,11 +8,15 @@ http://biopython.org/DIST/docs/install/Installation.html
 
 Some BioPython install notes (linux)
 1. install numpy
+
 sudo apt-get install python-pip #linux installer
+
 sudo pip install cython
 
 2. clone numpy git repo
+
 git clone git://github.com/numpy/numpy.git numpy
+
 cd numpy
 
 3. install numpy (need a C compiler)
