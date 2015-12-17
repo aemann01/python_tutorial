@@ -3,7 +3,8 @@ Some basic python stuff for programming meeting. Will need to have some things i
 Install python (not 3.0):
 https://www.python.org/downloads/
 
-#BioPython install: http://biopython.org/DIST/docs/install/Installation.html
+#BioPython install: 
+http://biopython.org/DIST/docs/install/Installation.html
 
 Some BioPython install notes (linux)
 1. install numpy
@@ -38,10 +39,12 @@ cd biopython-1.66/
 
 sudo python setup.py install
 
-#Pandas install: http://pandas.pydata.org/pandas-docs/stable/install.html
+#Pandas install: 
+http://pandas.pydata.org/pandas-docs/stable/install.html
 
 1. how to with pip
 
 sudo pip install pandas
 
-#IPython install: http://ipython.org/install.html
+#IPython install: 
+http://ipython.org/install.html
