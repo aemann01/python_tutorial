@@ -7,7 +7,7 @@ https://www.python.org/downloads/
 BioPython install: 
 http://biopython.org/DIST/docs/install/Installation.html
 
-#Some BioPython install notes (linux)
+---Some BioPython install notes (linux)
 Dependencies install
 Numpy
 sudo apt-get install python-pip #linux installer
