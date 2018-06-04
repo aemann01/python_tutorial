@@ -6,7 +6,7 @@ Python is a flexible object-oriented programming language that is often used in 
 
 python --version
 
-This tutorial is running on the 2.7.6 release of python. If you have 3.0 or above there may be some syntax issues. Instructions for installing python can be found here: https://www.python.org/downloads/
+This tutorial runs on python version 3 or above. If you have 2.7 or below installed, there will some syntax issues. Instructions for installing python can be found here: https://www.python.org/downloads
 
 
 #################################
@@ -16,16 +16,16 @@ Syntax
 Python programs are written as text documents and end with the .py extension. Typically, python scripts begin with #!/usr/bin/python (#! is called a shebang) which indicates the location of your python install and makes the script executable (though this isn't strictly necessary). Unlike other programming languages (such as perl or R), blocks of code are not specified by brackets or bracers. Instead, blocks of code are indicated by indentation and colons. For example:
 
 if (x > y):
-	print "x is greater than y"
+	print("x is greater than y")
 else:
-	print "x is less than or equal to y" 
+	print("x is less than or equal to y")
 
 In this script, a print statement is run depending on which criteria is met as set up in the if, else statements. It's good practice to include comments in your code with further information on what a particular block of code or statement does (or is intented to do). Comments in python are indicated by the # sign. For example:
 
 if (x > y):
-	print "x is greater than y" #python will ignore this text
+	print("x is greater than y") #python will ignore this text
 else:
-	print "x is less than or equal to y" 
+	print("x is less than or equal to y") 
 
 #################################
 Data types
@@ -49,7 +49,9 @@ my_string = "Hello world"
 
 This stores "Hello world" to the variable name my_string but does nothing else. If I wanted my string to be printed to the screen you can call the print statement:
 
-print my_string
+print(my_string)
+
+#Note: in ipython you can just call the variable to print to screen
 
 Notice that strings are specified by quotes (double or single) but not variable names. Strings that span multiple lines are indicated by """ Some long string """.
 
@@ -60,7 +62,7 @@ Loops
 There are many ways to iterate through a list of objects or for a specific number of times in python. The most common ways are by using a for or while loop. For loops iterate over some predefined number. For example:
 
 for x in range(0,10):
-	print "Value is now: %i" %x
+	print("Value is now: %i" % x)
 
 This will print a count down to your screen from zero to nine. Note that 10 is not included! Everything UP TO your upper range limit is printed. While loops are very similar but instead of iterating over a number of objects or instances it will run the loop as long as some statement is true. For example:
 
@@ -68,16 +70,16 @@ b = 0
 a = 10
 
 while (b < a):
-	print "b is still less than a"
+	print("b is still less than a")
 	b += 1
 
 In this loop we first initialize two new variables, a and b. In each pass of the while loop python evaluates whether or not b is less than a, prints a string to screen, and finally adds one to our b variable. The += operator is known as a contraction operator and is equivalent to b = b+1. If you wanted your loop to evaluate two separate conditions you can add another useful loop statement, else:
 
 while (b < a):
-	print "b is still less than a"
+	print("b is still less than a")
 	b += 1
 else:
-	print "b is now more than a"
+	print("b is now more than a")
 	
 
 #################################
@@ -87,20 +89,33 @@ Math and other operators
 Operators are like functions that can be used to calculate or compare variables or objects. Arithmatic operators in python include the following:
 
 Addition: +
+7 + 3
 Subtraction: -
+7 - 3
 Multiplication: *
+7 * 3
 Division: / 
+7 / 3
 Exponentiation: **
+7 **3
 Modulus: % (this finds the remainder after division of one number by another, it is NOT the same as division)
+7 % 3
 
 It may also be useful to compare two or more variables or have some sort of logical statement. To compare objects:
 
 Is equal to: ==
+7 == 3
+7 == 7
 Is not equal to: != (! is often called a bang or shriek in programming. So != is "bang equals")
+7 != 3
 Less than: <
+7 > 3
 More than: >
+7 < 3
 Less than or equal to: <=
+7 <= 3
 More than or equal to: >=
+7 >= 3
 
 Some other special statements in python are useful for evaluating logical conditions. For example:
 
@@ -147,20 +162,47 @@ Now write out your script by first importing the SeqIO module from BioPython
 
 from Bio import SeqIO
 
-You need to create input and output handles for your genbank file and your (up to now nonexistant fasta output file). When assigning your files you also need to indicate whether or not you want python to read or write to your file which is indicated by "rU" --> read universal newline mode and "w" --> write mode:
+#let's try to get some information from this file
 
-input_file = open("my_file.gb", "rU")
-output_file = open("my_file.fasta", "w")
+for seqRecord in SeqIO.parse("my_file.gb", "genbank"):
+	print(seqRecord)
 
-Now use SeqIO to parse your genbank file, write them to your output file as fasta, and get the number of records that are converted:
+#this is all of the info you can get from your seqRecord object
+#pull out a couple interesting bits of info
 
-sequences = SeqIO.parse(input_file, "genbank")
-count = SeqIO.write(sequences, output_file, "fasta")
+seqRecord.id
+seqRecord.name
+seqRecord.description
+seqRecord.seq
 
-Finally, close your input and output handles and print the number of sequences to screen:
+#what about the information with a / before it? -- these are elements of other larger groupings -- so for example, 
 
-output_file.close()
-input_file.close()
-print "Converted %i records" %count
+Number of features: 4
+/molecule_type=DNA
+/data_file_division=PLN
+/date=14-SEP-2000
+/accessions=['AF297471']
+/sequence_version=1
+/gi=10121868
+/keywords=['']
+/source=rape
+/organism=Brassica napus
+/taxonomy=['Eukaryota', 'Viridiplantae', 'Embryophyta', 'Tracheophyta', 'Spermatophyta', 'Magnoliophyta', 'eudicotyledons', 'core eudicots', 'Rosidae', 'eurosids II', 'Brassicales', 'Brassicaceae', 
+'Brassica']
+/references=[Reference(title='BN28a, a low temperature-induced gene of Brassica napus', ...), Reference(title='Direct Submission', ...)]
 
-If your script ran correctly you should be notified that you converted 6 records and you have a new file: my_file.fasta in your working directory.
+#these are annotations -- what if you want to get a list of the organisms?
+
+for seqRecord in SeqIO.parse("my_file.gb", "genbank"):
+	print(seqRecord.annotations["organism"])
+
+#ok now let's convert genbank to fasta
+#first need an output handle -- place holder for your output file
+output_handle = open("my_file.fa", "w")
+
+#now write in fasta format
+for seqRecord in SeqIO.parse("my_file.gb", "genbank"):
+	output_handle.write(">%s %s\n%s\n" % (seqRecord.id, seqRecord.description, seqRecord.seq))	
+
+#close the output handle
+output_handle.close()

@@ -1,8 +1,9 @@
+#!/usr/bin/python3
 #import statements
 import sys
 
 #doc string explaining what/how to use the program
-'''Useage: python helloWorld.py <your name>'''
+'''Usage: python helloWorld.py <your name>'''
 
 #a simple function
 def main():
